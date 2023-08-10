@@ -1,0 +1,18 @@
+node{
+    stage('SCM Checkout'){
+        git 'https://gitlab.com/aguinaldoa80/seec-teste'
+    }
+    stage('Compile-Package'){
+        sh 'mvn package -DskipTests'
+    }
+    stage('Email Notification'){
+        mail bcc: '', body: 'Testing mail from pipeline', cc: '', from: '', replyTo: '', subject: 'Jenkins Job', to: 'aguinaldoa80@gmail.com'
+    }
+    stage('Slack Notification'){
+        slackSend baseUrl: 'https://hooks.slack.com/services/', 
+        channel: '#jenkins-pipeline-test', 
+        color: 'good', 
+        message: 'Welome from jenkins, Slack!', 
+        tokenCredentialId: 'Slack'
+    }
+}
