@@ -1,0 +1,13 @@
+- name: Start container with block device read limit
+  community.docker.docker_container:
+    name: test
+    image: ubuntu:18.04
+    state: started
+    device_read_bps:
+      # Limit read rate for /dev/sda to 20 mebibytes per second
+      - path: /dev/sda
+        rate: 20M
+    device_read_iops:
+      # Limit read rate for /dev/sdb to 300 IO per second
+      - path: /dev/sdb
+        rate: 300
