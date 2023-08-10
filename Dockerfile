@@ -16,4 +16,5 @@ CMD java -jar \
 
 #### Containers should NOT run as root as a good practice
 USER sn_309
+# docker build -t demo-jenkins .
 # docker run -d --name demo-jenkins -p 8090:8090 demo-jenkins

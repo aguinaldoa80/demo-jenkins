@@ -13,7 +13,7 @@ public class CalculatorController {
 
   @GetMapping
 	public ResponseEntity<String> soma() {
-		return ResponseEntity.ok("Welcome from endpoint soma.");
+		return ResponseEntity.ok("Deployed from jenkins and ansible!!!");
 	}
     
 }
