@@ -1,5 +1,5 @@
 ---
-- hosts: dev
+- hosts: DEV
   become: True
   tasks:
     - name: Install required system packages
