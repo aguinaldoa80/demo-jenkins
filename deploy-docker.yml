@@ -2,15 +2,20 @@
 - hosts: dev
   become: True
   tasks:
-    - name: Install Python3
-      raw: sudo apt -y update && apt install -y python3
-      when: check_python.rc != 0
-    - name: Install python3-pip
-      raw: sudo apt install -y python3-pip
-      state: present
-    - name: Install docker
-      raw: sudo apt install -y docker-compose
-      state: present
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+          - docker-compose
+        state: latest
+        update_cache: true
     - name: Start docker
       service:
         name: docker
