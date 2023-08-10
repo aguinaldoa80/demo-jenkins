@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Welcome') {
+            steps {
+                echo 'Hello from jenkins declarative'
+            }
+        }
+        stage('git checkout'){
+            steps{
+                git credentialsId: 'GitLab', url: 'https://gitlab.com/aguinaldoa80/demo-jenkins'
+            }
+        }
+    }
+}
