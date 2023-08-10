@@ -1,7 +1,7 @@
 pipeline {
     agent any
     enviroment{
-        /*PATH = '/usr/share/maven/bin:$PATH'*/
+        //PATH = '/usr/share/maven/bin:$PATH'
     }
     stages {
         stage('Welcome') {
