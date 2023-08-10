@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    /*enviroment{
+        PATH = '/usr/share/maven/bin:$PATH'
+    }*/
+    stages {
+        stage('Welcome') {
+            steps {
+                echo 'Hello from jenkins declarative'
+            }
+        }
+        stage('git checkout'){
+            steps{
+                git credentialsId: 'GitLab', url: 'https://gitlab.com/aguinaldoa80/demo-jenkins'
+            }
+        }
+        stage('Maven build'){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+node{
+  stage('SCM Checkout'){
+    git 'https://gitlab.com/aguinaldoa80/seec-teste'
+  }
+  stage('Compile-Package'){
+    sh 'mvn package -DskipTests'
+  }
+  
+  stage('SonarQube Analysis') {
+       withSonarQubeEnv('SonarQube') { 
+         sh "mvn sonar:sonar \
+  -Dsonar.projectKey=seec-teste-key \
+  -Dsonar.host.url=http://34.125.229.0:9000 \
+  -Dsonar.login=sqp_5e917cc25ea425469729a8587c9cced2c0e45f5d"
+       }
+   }
+  
+  stage('Email Notification'){
+    mail bcc: '', body: 'Testing mail from pipeline', cc: '', from: '', replyTo: '', subject: 'Jenkins Job', to: 'aguinaldoa80@gmail.com'
+  }
+  /*T05JQGV0Y7K/B05JBQD6JAX/lSuMZSqDE1iEBQTOXLKvqP6d*/
+  stage('Slack Notification'){
+      slackSend baseUrl: 'https://hooks.slack.com/services/', 
+      channel: '#jenkins-pipeline-test', 
+      color: 'good', 
+      message: 'Welome from jenkins, Slack!', 
+      tokenCredentialId: 'Slack-token'
+  }
+
+}
