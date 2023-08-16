@@ -33,15 +33,22 @@ pipeline{
            }
         }
         
-        stage('Docker Deploy'){
+        stage('Deploy k8s'){
             steps{
-                ansiblePlaybook credentialsId: 
-                    'ssh-devserver', 
-                    disableHostKeyChecking: true, 
-                    extras: '-e DOCKER_TAG="${DOCKER_TAG}"', 
-                    installation: 'ansible', 
-                    inventory: 'dev.inv', 
-                    playbook: 'deploy-docker.yml'
+                sh 'chmod +x changeTag.sh'
+                sh './changeTag.sh ${DOCKER_TAG}'
+                sshagent(['ssh-kops']) {
+                    sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/deploy-k8s/services.yml \
+                    /var/lib/jenkins/workspace/deploy-k8s/node-app-pod.yml \
+                    aguinaldoa80@34.125.168.18:/home/aguinaldoa80/'
+                    script{
+                        try{
+                            sh 'ssh aguinaldoa80@34.125.168.18 kubectl apply -f .'
+                        }catch(error){
+                            sh 'ssh aguinaldoa80@34.125.168.18 kubectl create -f .'
+                        }
+                    }
+                }
             }
         }
     }
