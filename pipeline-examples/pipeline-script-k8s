@@ -36,8 +36,8 @@ pipeline{
         
         stage('Deploy k8s'){
             steps{
-                sh 'chmod +x changeTag.sh'
-                sh './changeTag.sh ${DOCKER_TAG}'
+                sh 'chmod +x /var/lib/jenkins/workspace/deploy-k8s/changeTag.sh'
+                sh './var/lib/jenkins/workspace/deploy-k8s/changeTag.sh ${DOCKER_TAG}'
                 sshagent(['ssh-kops']) {
                     sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/deploy-k8s/services.yml \
                     /var/lib/jenkins/workspace/deploy-k8s/node-app-pod.yml \
