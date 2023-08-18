@@ -1,18 +1,27 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-jenkins
+  name: demo-jenkins-replicaset
   labels:
     app: demo-jenkins
 spec:
+  # modify replicas according to your case
   replicas: 3
-  spec:
-    containers:
+  selector:
+    matchLabels:
+      app: demo-jenkins
+  template:
+    metadata:
+      labels:
+        app: demo-jenkins
+    spec:
+      containers:
       - name: demo-jenkins
         image: jintsuy/demo-jenkins:tagVersion
         ports:
-          - name: web
-            containerPort: 8080
+        - name: web
+          containerPort:  8080
+          protocol: TCP
         env:
         - name: NGX_VERSION
           value: 1.16.1
