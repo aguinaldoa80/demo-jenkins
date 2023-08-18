@@ -1,12 +1,19 @@
 apiVersion: v1
-kind: Pod
+kind: ReplicaSet
 metadata:
   name: demo-jenkins
   labels:
     app: demo-jenkins
 spec:
-  containers:
-    - name: demo-jenkins
-      image: jintsuy/demo-jenkins:tagVersion
-      ports:
-        - containerPort: 8080
+  replicas: 3
+  spec:
+    containers:
+      - name: demo-jenkins
+        image: jintsuy/demo-jenkins:tagVersion
+        ports:
+          - name: web
+            containerPort: 8080
+            protocol: TCP
+          env:
+          - name: NGX_VERSION
+            value: 1.16.1

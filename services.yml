@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: demo-jenkins
+  name: demo-jenkins-service
 spec:
   selector:
     app: demo-jenkins
