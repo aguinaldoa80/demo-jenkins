@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-jenkins-replicaset
+  name: demo-jenkins-deployment
   labels:
     app: demo-jenkins
 spec:
