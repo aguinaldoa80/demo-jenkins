@@ -6,12 +6,14 @@ metadata:
     app: demo-jenkins
 spec:
   replicas: 3
-  containers:
-    - name: demo-jenkins
-      image: jintsuy/demo-jenkins:tagVersion
-      ports:
-        - name: web
-          containerPort: 8080
-      env:
-      - name: NGX_VERSION
-        value: 1.16.1
+  spec:
+    replicas: 3
+    containers:
+      - name: demo-jenkins
+        image: jintsuy/demo-jenkins:tagVersion
+        ports:
+          - name: web
+            containerPort: 8080
+        env:
+        - name: NGX_VERSION
+          value: 1.16.1
