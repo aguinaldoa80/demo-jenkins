@@ -7,7 +7,6 @@ metadata:
 spec:
   replicas: 3
   spec:
-    replicas: 3
     containers:
       - name: demo-jenkins
         image: jintsuy/demo-jenkins:tagVersion
