@@ -53,27 +53,11 @@ jobs:
       - name: Configuração do Kubeconfig
         shell: bash
         run: |
-          aws eks update-kubeconfig --name imersao-eks --region us-east-1
+          aws eks update-kubeconfig --name eks-imersao --region us-east-1
       - name: Deploy do worker no cluster Kubernetes 
         uses: Azure/k8s-deploy@v4.9
         with:
           manifests: |
-            home-broker/04-k8s-deploy/02-worker/deployment.yaml
+            pods.yaml
           images: |
-            fabricioveronez/trader-worker:${{github.run_number}}
-            
-      - name: Deploy da api no cluster Kubernetes
-        uses: Azure/k8s-deploy@v4.9
-        with:
-          manifests: |
-            home-broker/04-k8s-deploy/03-api/deployment.yaml
-          images: |
-            fabricioveronez/trader-api:${{github.run_number}}
-
-      - name: Deploy do frontend no cluster Kubernetes
-        uses: Azure/k8s-deploy@v4.9
-        with:
-          manifests: |
-            home-broker/04-k8s-deploy/04-frontend/deployment.yaml
-          images: |
-            fabricioveronez/trader-web:${{github.run_number}}
+            jintsuy/demo-jenkins:${{github.run_number}}
