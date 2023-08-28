@@ -6,7 +6,7 @@ metadata:
     app: demo-jenkins
 spec:
   # modify replicas according to your case
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
       app: demo-jenkins
