@@ -58,6 +58,6 @@ jobs:
         uses: Azure/k8s-deploy@v4.9
         with:
           manifests: |
-            pods.yaml
+            ./pods.yml
           images: |
             jintsuy/demo-jenkins:${{github.run_number}}
