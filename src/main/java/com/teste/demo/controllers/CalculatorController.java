@@ -13,7 +13,7 @@ public class CalculatorController {
 
   @GetMapping
 	public ResponseEntity<String> soma() {
-		return ResponseEntity.ok("Deployed from jenkins and k8s!!!");
+		return ResponseEntity.ok("Deployed from GitHubActions to k8s!!!");
 	}
     
 }
