@@ -7,3 +7,10 @@ kops get cluster --state $KOPS_STATE_STORE simple.k8s.local -oyaml
 kubectl run hey  --image helo-world
 kubectl get pod
 kubectl delete pod hey
+
+https://s3.us-west-2.amazonaws.com/amazon-eks/cloudformation/2020-10-29/amazon-eks-vpc-private-subnets.yaml
+
+Comando para obter a senha do administrador no Grafana.
+
+kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
