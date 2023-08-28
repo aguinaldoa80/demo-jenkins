@@ -1,9 +1,10 @@
 FROM openjdk:14
 
 ARG JAR_FILE
-COPY target/*.war /demo/app.war
 
 RUN useradd -ms /bin/bash sn_309
+RUN mvn clean package
+COPY target/*.war /demo/app.war
 RUN chown -R sn_309:root /demo
 
 ENV TZ=America/Sao_Paulo
